@@ -24,7 +24,10 @@ jobs:
     steps:
       - name: A compléter
         run: |
-          echo "Écrire ici les étapes de test de l'application"
+          action actions/checkout@v4/
+          action actions/setup-python@v5/
+          pip install -r requirements.txt pytest/
+          pytest -v tests/
 
   # ---------------------------------------------------------------
   # JOB 2 - Livraison continue : construire l'image Docker
