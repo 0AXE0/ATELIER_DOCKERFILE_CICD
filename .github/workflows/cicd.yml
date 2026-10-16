@@ -27,29 +27,24 @@ jobs:
       - name: Lancer les tests
         run: pytest -v tests
 
-  # ---------------------------------------------------------------
-  # JOB 2 - Livraison continue : construire l'image Docker
-  # ---------------------------------------------------------------
-  # Objectif : si les tests passent, construire l'image Docker de
-  # l'application (pensez à compléter le fichier Dockerfile !).
-  #
-  # Étapes à écrire :
-  #   1. Récupérer le code du dépôt
-  #   2. Construire l'image                -> docker build -t $IMAGE_NAME:${{ github.sha }} .
-  #   3. Exporter l'image dans un fichier  -> docker save ... -o image.tar
-  #   4. Transmettre le fichier au job 3   -> action actions/upload-artifact@v4
-  #
-  # Pourquoi l'étape 3 et 4 ? Chaque job tourne sur une machine neuve :
-  # l'image construite ici n'existe pas sur la machine du job 3.
   Docker:
     runs-on: ubuntu-latest
     needs: Tests
     steps:
-      - name: A compléter
-        run: |
-          docker build -t $IMAGE_NAME:${{ github.sha }}
-          docker save ... -o image.tar
-          action actions/upload-artifact@v4
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Construire l'image
+        run: docker build -t $IMAGE_NAME:${{ github.sha }} .
+
+      - name: Exporter l'image dans un fichier
+        run: docker save $IMAGE_NAME:${{ github.sha }} -o image.tar
+
+      - name: Transmettre l'image au job suivant
+        uses: actions/upload-artifact@v4
+        with:
+          name: image-docker
+          path: image.tar
 
   # ---------------------------------------------------------------
   # JOB 3 - Déploiement continu : simulation de mise en production
