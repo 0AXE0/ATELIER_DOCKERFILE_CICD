@@ -33,7 +33,7 @@ Les fichiers que vous allez modifier :
 | `Dockerfile` | La recette de l'image Docker (Job 2) |
 | `tests/test_app.py` | Les tests de l'application (fournis, à lire) |
 
-Après chaque modification : `git add`, `git commit`, `git push`, puis observez le résultat dans l'onglet **Actions**.
+Après chaque modification dans Codespace, pour pouvoir lancer vos Actions dans Github : `git add .`, `git commit` il faudra mettre un message, `git push`, puis observez le résultat dans l'onglet **Actions** dans GitHub.
 
 ## Job 1 : tester l'application
 
