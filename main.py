@@ -151,7 +151,7 @@ def cookie():
     resp = make_response(form)
     
     if value:
-        resp.set_cookie('value', b64encode(pickle.dumps(value)))
+        resp.set_cookie('value', b64encode(pickle.dumps(value)).decode())
 
     return resp
 
