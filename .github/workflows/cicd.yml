@@ -8,18 +8,6 @@ env:
   IMAGE_NAME: atelier-flask
 
 jobs:
-  # ---------------------------------------------------------------
-  # JOB 1 - Intégration continue : tester l'application
-  # ---------------------------------------------------------------
-  # Objectif : à chaque push, l'application doit être testée.
-  # Si un test échoue, le pipeline doit s'arrêter ici.
-  #
-  # Étapes à écrire :
-  #   1. Récupérer le code du dépôt       -> action actions/checkout@v4
-  #   2. Installer Python 3.12            -> action actions/setup-python@v5
-  #   3. Installer les dépendances        -> pip install -r requirements.txt  (+ pytest)
-  #   4. Lancer les tests                 -> pytest -v tests/
-jobs:
   Tests:
     runs-on: ubuntu-latest
     steps:
