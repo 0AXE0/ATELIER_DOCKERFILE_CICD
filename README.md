@@ -86,8 +86,7 @@ beaucoup d'équipes protègent leur production.
 
 ## À propos de l'application
 
-L'application est [Breakable Flask](https://github.com/stephenbradshaw/breakableflask) de Stephen Bradshaw
-(voir `COPYRIGHT.txt`). ⚠️ **Elle est volontairement vulnérable** (injections de code, de commandes, SQL…, voir
+⚠️ **L'application est volontairement vulnérable** (injections de code, de commandes, SQL…, voir
 `vulnerability_index.md`) : ne la déployez jamais sur un serveur réellement accessible. Ici, la
 « production » est simulée sur la machine jetable de GitHub Actions, qui est détruite à la fin du pipeline.
 
