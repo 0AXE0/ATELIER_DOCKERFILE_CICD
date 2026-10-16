@@ -47,7 +47,9 @@ jobs:
     steps:
       - name: A compléter
         run: |
-          echo "Écrire ici la construction de l'image Docker"
+          docker build -t $IMAGE_NAME:${{ github.sha }}
+          docker save ... -o image.tar
+          action actions/upload-artifact@v4
 
   # ---------------------------------------------------------------
   # JOB 3 - Déploiement continu : simulation de mise en production
