@@ -19,15 +19,25 @@ jobs:
   #   2. Installer Python 3.12            -> action actions/setup-python@v5
   #   3. Installer les dépendances        -> pip install -r requirements.txt  (+ pytest)
   #   4. Lancer les tests                 -> pytest -v tests/
+jobs:
   Tests:
     runs-on: ubuntu-latest
     steps:
-      - name: A compléter
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Installer les dépendances
         run: |
-          action actions/checkout@v4/
-          action actions/setup-python@v5/
-          pip install -r requirements.txt pytest/
-          pytest -v tests/
+          pip install -r requirements.txt
+          pip install pytest
+
+      - name: Lancer les tests
+        run: pytest -v tests
 
   # ---------------------------------------------------------------
   # JOB 2 - Livraison continue : construire l'image Docker
