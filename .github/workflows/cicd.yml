@@ -84,11 +84,27 @@ jobs:
   #      (attention : l'application met quelques secondes à démarrer)
   #   5. Afficher un message de succès dans le résumé du pipeline
   #      -> echo "..." >> $GITHUB_STEP_SUMMARY
+  
   Production:
     runs-on: ubuntu-latest
     needs: Docker
     environment: production
     steps:
-      - name: A compléter
+      - name: Récupérer l'image Docker
+        uses: actions/download-artifact@v4
+        with:
+          name: image-docker
+
+      - name: Charger l'image Docker
+        run: docker load -i image.tar
+
+      - name: Démarrer le conteneur
+        run: docker run -d -p 4000:4000 $IMAGE_NAME:${{ github.sha }}
+
+      - name: Vérifier que Flask fonctionne
         run: |
-          echo "Écrire ici la simulation de mise en production"
+          curl --fail --retry 10 --retry-connrefused --retry-delay 2 http://localhost:4000/
+
+      - name: Afficher le succès
+        run: |
+          echo "Mise en production simulée avec succès !" >> $GITHUB_STEP_SUMMARY
